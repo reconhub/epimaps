@@ -3,12 +3,16 @@
 \docType{data}
 \name{Mex_travel_2009}
 \alias{Mex_travel_2009}
-\title{hjhj}
-\format{An object of class \code{list} of length 2.}
+\title{Travel data to and from Mexico in 2009}
+\format{A list of 2 elements
+\describe{
+  \item{1}{An unsymmetrical matrix (data frame object) of ...}
+  \item{2}{Country metadata (data frame object) ...}
+}}
 \usage{
 Mex_travel_2009
 }
 \description{
-hjhj
+<Description>
 }
 \keyword{datasets}

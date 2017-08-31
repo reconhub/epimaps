@@ -52,10 +52,16 @@ validate_flows <- function(flows, linelist) {
     stop("flows must contain numeric values only")
   }
   if (length(diffs <- setdiff(colnames(flows), rownames(flows))) > 0) {
-    stop("Column and row names differ\nDifferences: ", diffs)
+    stop(
+      "Column and row names differ\nDifferences: ",
+      paste(diffs, collapse = ", ")
+    )
   }
   if (length(diffs <- setdiff(colnames(flows), linelist$code)) > 0) {
-    stop("Codes should match those from linelist\nDifferences: ", diffs)
+    stop(
+      "Codes should match those from linelist\nDifferences: ",
+      paste(diffs, collapse = ", ")
+    )
   }
   flows
 }
