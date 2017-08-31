@@ -4,8 +4,8 @@
 #'
 #' @export
 make_epiflows <- function(linelist, flows) {
-  linelist <- validateLinelist(linelist)
-  flows <- validateFlows(flows, linelist)
+  linelist <- validate_line_list(linelist)
+  flows <- validate_flows(flows, linelist)
 
   structure(
     list(flows = flows, linelist = linelist),
@@ -15,24 +15,24 @@ make_epiflows <- function(linelist, flows) {
 
 ## Terminates the workflow and throws an error
 ## when x is NULL, NA, or an empty object (e.g., character(0)).
-stopIfInvalid <- function(x) {
-  objectName <- as.character(substitute(x))
+stop_if_invalid <- function(x) {
+  object_name <- as.character(substitute(x))
 
   if (is.null(x)) {
-    stop(objectName, " is NULL")
+    stop(object_name, " is NULL")
   }
   if (length(x) == 0) {
-    stop(objectName, " is empty")
+    stop(object_name, " is empty")
   }
   if (all(is.na(x))) {
-    stop(objectName, " is NA")
+    stop(object_name, " is NA")
   }
 }
 
 ## If linelist is valid, returns it as a data frame.
 ## If not, stops the workflow.
-validateLinelist <- function(linelist) {
-  stopIfInvalid(linelist)
+validate_line_list <- function(linelist) {
+  stop_if_invalid(linelist)
 
   linelist <- as.data.frame(linelist, stringsAsFactors = FALSE)
   if (!"code" %in% colnames(linelist)) {
@@ -44,8 +44,8 @@ validateLinelist <- function(linelist) {
 
 ## If flows is valid (and complies with data from linelist),
 ## returns it as a data frame; if not, stops the workflow.
-validateFlows <- function(flows, linelist) {
-  stopIfInvalid(flows)
+validate_flows <- function(flows, linelist) {
+  stop_if_invalid(flows)
   flows <- as.data.frame(flows)
 
   if (!all(sapply(flows, is.numeric))) {
