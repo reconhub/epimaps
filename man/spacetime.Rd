@@ -42,10 +42,12 @@ from the \code{spacetime} package for \code{incidence} objects (from the
 \code{incidence} package), which are stratified by locations.
 }
 \examples{
-if (requireNamespace("sp") &&
-    requireNamespace("raster") &&
-    requireNamespace("outbreaks") &&
-    requireNamespace("incidence")) {
+
+\dontrun{
+if (require("sp") &&
+    require("raster") &&
+    require("outbreaks") &&
+    require("incidence")) {
 
 ## fetch shapefiles for different admin levels
 adm2data <- raster::getData('GADM', country = 'SLE', level = 2)
@@ -74,7 +76,7 @@ res <- spacetime(x, adm2data)
 
 ## note that the function returns several objects
 names(res)
-
+}
 }
 
 }
