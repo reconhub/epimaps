@@ -154,7 +154,7 @@ spacetime <- function(obj, sf, type = c("map", "heatmap"),
     breaks <- c(0, 1, breaks[breaks > 1])
   }
 
-  col <- c("white", pal(length(breaks) - 1))
+  my_col <- c("white", pal(length(breaks) - 1))
 
   if (type == "map") {
 
