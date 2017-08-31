@@ -4,7 +4,7 @@
 \alias{spacetime}
 \title{Spatio-temporal maps from incidence objects}
 \usage{
-spacetime(obj, sf, type = c("map", "heatmap", "none"), breaks = NULL,
+spacetime(obj, sf, type = c("map", "heatmap"), breaks = NULL,
   field = "NAME_2", pal = viridis::viridis, ...)
 }
 \arguments{
@@ -16,7 +16,7 @@ shapefile.}
 object from the \code{sp} package.}
 
 \item{type}{A character string indicating the type of graphics to produce: a
-map ("map"), a heatmap ("heatmap"), or no plot ("none").}
+map ("map"), or a heatmap ("heatmap").}
 
 \item{breaks}{A numeric vector indicating break points for the color scale.}
 
@@ -29,11 +29,10 @@ incidence stratification.}
 \item{...}{Further arguments to be passed to \code{stplot}.}
 }
 \value{
-The function invisibly returns a list containing:
+The function returns a plot with extra attributes:
 \itemize{
  \item \code{incience_mat}: an incidence matrix
  \item \code{stfdf_obj}: an stfdf object
- \item \code{plot}: the plot produced
 }
 }
 \description{
@@ -42,10 +41,12 @@ from the \code{spacetime} package for \code{incidence} objects (from the
 \code{incidence} package), which are stratified by locations.
 }
 \examples{
-if (requireNamespace("sp") &&
-    requireNamespace("raster") &&
-    requireNamespace("outbreaks") &&
-    requireNamespace("incidence")) {
+
+\dontrun{
+if (require("sp") &&
+    require("raster") &&
+    require("outbreaks") &&
+    require("incidence")) {
 
 ## fetch shapefiles for different admin levels
 adm2data <- raster::getData('GADM', country = 'SLE', level = 2)
@@ -71,10 +72,11 @@ x <- incidence::incidence(dat$date_of_onset, 30, groups = dat$adm2)
 
 ## make plot
 res <- spacetime(x, adm2data)
+res
 
-## note that the function returns several objects
-names(res)
-
+## extra data stored in attributes
+attributes(res)
+}
 }
 
 }
