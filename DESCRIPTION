@@ -1,13 +1,16 @@
 Package: epimaps
-Title: An expressive Title in Titlecase
-Version: 0.0.1.9000
-Authors@R: person("Your", "Name", email = "your.name@localhost", role = c("aut", "cre"))
-Description: Please add a description.
+Title: Mapping Tools for Epidemics 
+Version: 0.0.1
+Authors@R: c(person("Pawel", "Addyourinfo", email = "your.name@localhost", role = c("aut", "cre")),
+	     person("Isobel", "Blake", email = "isobel.blake@imperial.ac.uk", role = "aut"),
+	     person("Thibaut", "Jombart", email = "thibautjombart@gmail.com", role = "aut"))
+Description: A collection of tools for mapping epidemics. 
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat, roxygen2
+Imports: sp, spacetime, xts, incidence, raster, methods
+Suggests: testthat, roxygen2, knitr, outbreaks
 RoxygenNote: 6.0.1
 URL: https://github.com/reconhub/epimaps
 BugReports: https://github.com/reconhub/epimaps/issues

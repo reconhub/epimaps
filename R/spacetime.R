@@ -4,6 +4,9 @@
 #' from the \code{spacetime} package for \code{incidence} objects (from the
 #' \code{incidence} package), which are stratified by locations.
 #'
+#' @export
+#'
+#' @importFrom methods as
 #'
 #' @author Isobel Blake (\email{isobel.blake@@imperial.ac.uk})
 #' and Thibaut Jombart (\email{thibautjombart@@gmail.com})
@@ -15,33 +18,39 @@
 #' }
 #'
 #' @examples
-#' if (require(sp) && require(raster) && require(outbreaks)) {
+#' if (requireNamespace("sp") &&
+#'     requireNamespace("raster") &&
+#'     requireNamespace("outbreaks") &&
+#'     requireNamespace("incidence")) {
+#'
 #' ## fetch shapefiles for different admin levels
-#' adm2data<-raster::getData('GADM', country = 'SLE', level = 2)
-#' adm1data<-raster::getData('GADM', country = 'SLE', level = 1)
-#' adm0data<-raster::getData('GADM', country = 'SLE', level = 0)
+#' adm2data <- raster::getData('GADM', country = 'SLE', level = 2)
+#' adm1data <- raster::getData('GADM', country = 'SLE', level = 1)
+#' adm0data <- raster::getData('GADM', country = 'SLE', level = 0)
 #'
 #' ## plot data
 #' plot(adm2data, border = "grey")
 #' plot(adm1data, add = TRUE)
 #' plot(adm0data, add = TRUE, lwd = 2)
-#' text(getSpPPolygonsLabptSlots(adm2data), labels = adm2data$NAME_2, cex = 0.6)
+#' text(sp::coordinates(adm2data), labels = adm2data$NAME_2, cex = 0.6)
 #'
 #' ## make fake data
 #' dat <- ebola_sim$linelist
 #'
 #' ## randomly assign district location
 #' p <- c(0.15,0.1,0.01,0.01,0.02,0,0,0.05,0.01,0,0.05,0.1,0.25,0.25)
-#' dat$adm2 <- sample(adm2data$NAME_2, size = nrow(dat), replace = TRUE, prob = p)
+#' dat$adm2 <- sample(adm2data$NAME_2, size = nrow(dat),
+#'                    replace = TRUE, prob = p)
 #'
 #' ## make an incidence object
-#' x <- incidence(dat$date_of_onset, 30, groups = dat$adm2)
+#' x <- incidence::incidence(dat$date_of_onset, 30, groups = dat$adm2)
 #'
 #' ## make plot
 #' res <- spacetime(x, adm2data)
 #'
 #' ## note that the function returns several objects
 #' names(res)
+#'
 #' }
 #'
 #' @return
@@ -67,6 +76,10 @@
 #'   map ("map"), a heatmap ("heatmap"), or no plot ("none").
 #'
 #' @param breaks A numeric vector indicating break points for the color scale.
+#'
+#' @param pal A color palette to be used for plotting.
+#'
+#' @param ... Further arguments to be passed to \code{stplot}.
 #'
 spacetime <- function(obj, sf, type = c("map", "heatmap", "none"),
                       breaks = NULL, field = "NAME_2",
