@@ -6,6 +6,27 @@
 \usage{
 make_epiflows(linelist, flows)
 }
+\arguments{
+\item{linelist}{A data frame of location data. Locations should be uniquely
+identified by codes from the `code` column.}
+
+\item{flows}{A numeric matrix of flows between locations. Row and column
+names must denote location codes.}
+}
+\value{
+An \code{epiflows} object.
+}
 \description{
-Description
+Takes a list of location data and a matrix of flows, and creates
+an object of class `epiflows`. An error is thrown if the input is invalid.
+}
+\examples{
+input_data <- Mex_travel_2009
+flows <- make_epiflows(input_data[[2]], input_data[[1]])
+print(subset(flows$linelist, code == "MEX")) # print the data for Mexico
+print(flows$flows["MEX", ]) # ...and flows from Mexico to other countries
+
+}
+\author{
+Pawel Piatkowski
 }
