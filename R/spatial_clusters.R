@@ -57,8 +57,8 @@ spatial_clusters <- function(x, k){
   clusters_coords <- data.frame(clusters$centers,
                                 number = clusters$size)
 
-  voronoi <- deldir::deldir(clusters$centers[, 1],
-                            clusters$centers[, 2])
+  voronoi <- suppressMessages(deldir::deldir(clusters$centers[, 1],
+                                             clusters$centers[, 2]))
 
   out <- list(lonlat = x,
               clusters_coords = clusters_coords,
@@ -80,7 +80,7 @@ spatial_clusters <- function(x, k){
 print.spatial_clusters <- function(x, ...) {
   n <- nrow(x$lonlat)
   k <- nrow(x$clusters)
-  cat("\n  /// spatial_clusters object")
+  cat("\n  /// spatial_clusters object //\n")
   cat("\n  // $lonlat: [matrix]", "lon/lat for",
       n, "point locations")
   cat("\n  // $clusters_coords: [matrix]", "lon/lat/size for",
@@ -89,7 +89,7 @@ print.spatial_clusters <- function(x, ...) {
       n, "point locations")
   cat("\n  // $voronoi: [deldir]", "voronoi tesselation for",
       k, "clusters")
-  cat("\n")
+  cat("\n\n")
 }
 
 
